@@ -1,0 +1,1095 @@
+{
+  "name": "Explicación completa N8N",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# 🎯 **GUÍA COMPLETA DE N8N**\n\n✨ **Triggers Disponibles**\n🔄 **Tipos de Acciones**\n🎨 **Ejemplos Prácticos**\n\n**Hecho con ❤️ por [Juan Pe Navarro](https://www.youtube.com/@juanpe.divisual)**",
+        "height": 200,
+        "width": 560,
+        "color": 6
+      },
+      "id": "03ea2a59-61ff-401f-8a2b-bf1a34e1752e",
+      "name": "Sticky Note - Intro",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "path": "demo-webhook",
+        "options": {}
+      },
+      "id": "70874c70-006b-45c3-bcd3-f80f1c8b1571",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        580
+      ],
+      "webhookId": "demo-webhook"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds"
+            }
+          ]
+        }
+      },
+      "id": "c483d06c-4420-49fd-87a9-8c54f3423778",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        1660,
+        580
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "a041fe4c-e7a1-45d8-a87b-702c0694f89a",
+      "name": "When clicking 'Test workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "b3afc41a-257b-45ec-8829-8b78448607f1",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c912d3c7-4dc8-4843-b362-55b491ec93fc",
+      "name": "Local File Trigger",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "feedUrl": "https://feeds.feedburner.com/oreilly"
+      },
+      "id": "f573d75e-7b07-4b30-8972-87928b4cd451",
+      "name": "RSS Feed Trigger",
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8d2d1b71-a73a-4cb3-8f93-423340957699",
+      "name": "Set - Data Transformation",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        2640,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "all": [
+                  {
+                    "value1": "={{$json.priority}}",
+                    "operation": "equal",
+                    "value2": "high"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "high_priority"
+            },
+            {
+              "conditions": {
+                "all": [
+                  {
+                    "value1": "={{$json.priority}}",
+                    "operation": "equal",
+                    "value2": "medium"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "medium_priority"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fc67dd0b-e627-48ac-9cb2-11cc4c60ff3a",
+      "name": "Switch - Multiple Paths",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        2920,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "18005820-5d5c-49f6-9125-f416faa207fe",
+      "name": "Merge - Combine Flows",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        2920,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.example.com/data",
+        "options": {}
+      },
+      "id": "485edc37-65a0-4d32-ab05-b27aa553182b",
+      "name": "HTTP Request - Core Action",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3240,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "id": "b6fb7ca4-e9f8-499c-a598-3413d0bb0dfb",
+      "name": "Wait - Pause Execution",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2920,
+        1400
+      ],
+      "webhookId": "f45425a2-950f-445e-ad77-a3d6674ac618"
+    },
+    {
+      "parameters": {
+        "content": "# 🚀 **TRIGGERS DISPONIBLES EN N8N**\n\n*Los triggers inician los workflows automáticamente*",
+        "height": 140,
+        "width": 860,
+        "color": 2
+      },
+      "id": "6beb1845-6d32-421e-be73-b97838dca9c1",
+      "name": "Sticky Note - Triggers Title",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🌐 **WEBHOOK TRIGGER**\n\n• Recibe peticiones HTTP\n• GET, POST, PUT, DELETE\n• Parámetros y headers personalizados\n• Respuestas automáticas\n\n*Ideal para: APIs, formularios web*",
+        "height": 240,
+        "width": 200,
+        "color": 3
+      },
+      "id": "7a73ddb8-a2ce-431e-9686-acdc4081d32f",
+      "name": "Sticky Note - Webhook",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "⏰ **CRON TRIGGER**\n\n• Programación temporal\n• Expresiones cron personalizadas\n• Intervalos fijos\n• Ejecución automática\n\n*Ideal para: reportes, backups*",
+        "height": 240,
+        "width": 200,
+        "color": 4
+      },
+      "id": "4af8e475-a773-4913-916c-acbc190e8373",
+      "name": "Sticky Note - Cron",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "👆 **MANUAL TRIGGER**\n\n• Ejecución manual\n• Testing de workflows\n• Datos de prueba\n• Desarrollo y debug\n\n*Ideal para: pruebas, desarrollo*",
+        "height": 240,
+        "width": 200,
+        "color": 5
+      },
+      "id": "25da3299-c2e5-41ed-a2f3-785756a5f2fa",
+      "name": "Sticky Note - Manual",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "📧 **EMAIL TRIGGER**\n\n• IMAP/POP3 polling\n• Filtros por remitente\n• Archivos adjuntos\n• Procesamiento automático\n\n*Ideal para: soporte, notificaciones*",
+        "height": 240,
+        "width": 200,
+        "color": 6
+      },
+      "id": "a61f7691-0657-4eac-8c3a-80d15077a7b9",
+      "name": "Sticky Note - Email",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "📁 **FILE TRIGGER**\n\n• Monitoreo de carpetas\n• Nuevos archivos\n• Cambios en archivos\n• Procesamiento automático\n\n*Ideal para: procesamiento de datos*",
+        "height": 260,
+        "width": 200,
+        "color": 7
+      },
+      "id": "9c652e32-2fed-413a-8d31-17ffbefa1c92",
+      "name": "Sticky Note - File",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🔗 **WEBHOOKS DE APPS**\n\n• GitHub, GitLab\n• Shopify, WooCommerce\n• Slack, Discord\n• Google Forms\n• Typeform, Calendly\n\n*Integración directa con servicios*",
+        "height": 260,
+        "width": 200,
+        "color": 8
+      },
+      "id": "63df223c-c695-4751-b926-cdb2f0dfd7b2",
+      "name": "Sticky Note - Apps",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🔄 **POLLING TRIGGERS**\n\n• RSS/Atom feeds\n• APIs con intervalos\n• Bases de datos\n• Servicios externos\n\n*Revisa cambios periódicamente*",
+        "height": 260,
+        "width": 200,
+        "color": 9
+      },
+      "id": "bdbe319c-0e24-4bf0-9f5c-db102b9e3b1b",
+      "name": "Sticky Note - Polling",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# ⚡ **TIPOS DE ACCIONES EN N8N**\n\n*Las acciones procesan y transforman los datos*",
+        "height": 140,
+        "width": 1180,
+        "color": 2
+      },
+      "id": "a047d1a4-eb5d-445f-8d4a-b9eecd595283",
+      "name": "Sticky Note - Actions Title",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2560,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🔧 **DATA TRANSFORMATION**\n\n• **Set Node**: Crear/modificar datos\n• **Function Node**: JavaScript personalizado\n• **Code Node**: Python/JavaScript\n• **Item Lists**: Dividir/agrupar elementos\n• **DateTime**: Formatear fechas\n• **Crypto**: Hash, encriptación\n\n*Manipular, filtrar o convertir datos*",
+        "height": 720,
+        "width": 280,
+        "color": 3
+      },
+      "id": "c3ed122a-7843-4177-a605-bd3548210f47",
+      "name": "Sticky Note - Data Transform",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2560,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🌊 **FLOW CONTROL**\n\n• **IF Node**: Condiciones lógicas\n• **Switch Node**: Múltiples rutas\n• **Merge Node**: Combinar flujos\n• **Wait Node**: Pausas temporales\n• **Split In Batches**: Procesar lotes\n• **Stop and Error**: Control de errores\n\n*Controlar el flujo del workflow*",
+        "height": 1280,
+        "width": 280,
+        "color": 4
+      },
+      "id": "537df56d-6aaa-4c97-b3a6-da3d6be8a210",
+      "name": "Sticky Note - Flow Control",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "⚙️ **CORE ACTIONS**\n\n• **HTTP Request**: APIs externas\n• **Execute Command**: Línea de comandos\n• **Read/Write Binary**: Archivos\n• **SSH**: Comandos remotos\n• **FTP/SFTP**: Transferencia archivos\n• **Webhook Response**: Responder APIs\n\n*Ejecutar código y hacer peticiones*",
+        "height": 940,
+        "width": 280,
+        "color": 5
+      },
+      "id": "696e974e-160a-45c2-b57a-8ff3637ca92a",
+      "name": "Sticky Note - Core Actions",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3160,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "👥 **HUMAN IN THE LOOP**\n\n• **Wait for Webhook**: Pausar hasta input\n• **Send Email**: Notificar usuarios\n• **Slack Message**: Pedir aprobación\n• **Form Trigger**: Formularios dinámicos\n• **Microsoft Teams**: Notificaciones\n\n*Esperar aprobación o input humano*",
+        "height": 940,
+        "width": 280,
+        "color": 6
+      },
+      "id": "1a922898-447c-4eb7-8736-d5aabbf6f899",
+      "name": "Sticky Note - Human Loop",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3460,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🔌 **INTEGRACIONES POPULARES**\n\n**Comunicación:**\n• Slack, Discord, Teams\n• Email (Gmail, Outlook)\n• WhatsApp, Telegram\n\n**Datos:**\n• Google Sheets, Airtable\n• MySQL, PostgreSQL, MongoDB\n• Redis, Elasticsearch\n\n**Almacenamiento:**\n• Google Drive, Dropbox\n• AWS S3, Azure Blob\n• FTP, SFTP",
+        "height": 1800,
+        "width": 280,
+        "color": 7
+      },
+      "id": "84c97dc0-ebb7-4737-a42b-e760204bd567",
+      "name": "Sticky Note - Integrations",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2560,
+        1660
+      ]
+    },
+    {
+      "parameters": {
+        "content": "💼 **APLICACIONES BUSINESS**\n\n**CRM:**\n• Salesforce, HubSpot\n• Pipedrive, Zoho CRM\n\n**E-commerce:**\n• Shopify, WooCommerce\n• Magento, PrestaShop\n\n**Marketing:**\n• Mailchimp, SendGrid\n• Facebook Ads, Google Ads\n\n**Productividad:**\n• Notion, Trello, Asana\n• Jira, Monday",
+        "height": 1800,
+        "width": 280,
+        "color": 8
+      },
+      "id": "2be4b74b-8ca7-404e-9161-2adf39258ed8",
+      "name": "Sticky Note - Business Apps",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2860,
+        1660
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🛠️ **HERRAMIENTAS DEVELOPER**\n\n**Control de Versiones:**\n• GitHub, GitLab, Bitbucket\n\n**CI/CD:**\n• Jenkins, GitHub Actions\n• Docker, Kubernetes\n\n**Monitoreo:**\n• Grafana, Prometheus\n• New Relic, DataDog\n\n**APIs:**\n• REST, GraphQL\n• OpenAPI, Postman",
+        "height": 400,
+        "width": 220,
+        "color": 9
+      },
+      "id": "6937667f-953c-4566-aed4-df4b7a058e71",
+      "name": "Sticky Note - Dev Tools",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4300,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "content": "✅ **MEJORES PRÁCTICAS**\n\n• **Naming**: Nombres descriptivos\n• **Error Handling**: Manejo de errores\n• **Testing**: Probar con datos reales\n• **Documentation**: Documentar workflows\n• **Security**: Credenciales seguras\n• **Performance**: Optimizar ejecución\n• **Monitoring**: Logs y alertas\n• **Version Control**: Git integration",
+        "height": 220,
+        "width": 420
+      },
+      "id": "582a9a98-1563-4601-bae9-f71a9bd0c9df",
+      "name": "Sticky Note - Best Practices",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4560,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "content": "🚀 **CARACTERÍSTICAS AVANZADAS**\n\n• **Sub-workflows**: Workflows anidados\n• **Variables**: Variables globales\n• **Environments**: Múltiples entornos\n• **Queues**: Cola de ejecución\n• **Workers**: Procesamiento distribuido\n• **API**: N8N REST API\n• **CLI**: Línea de comandos\n• **Community Nodes**: Nodos personalizados",
+        "height": 260,
+        "width": 300,
+        "color": 3
+      },
+      "id": "0a685734-89a7-4f1a-a1d0-87855ebd2303",
+      "name": "Sticky Note - Advanced",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3960,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "events": [
+          "invitee.created"
+        ]
+      },
+      "type": "n8n-nodes-base.calendlyTrigger",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        1080
+      ],
+      "id": "d0d4e6b3-6c56-4752-b5f3-847919fbb9c5",
+      "name": "Calendly Trigger",
+      "webhookId": "87c6f19a-36ef-4ece-9fec-2e07edc99d7d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dccc172b-c89e-4b67-8b1f-ccc38ef4c435",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2920,
+        660
+      ],
+      "id": "64e89d0b-d9cd-4f35-a17f-e0e35077d7d4",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        3540,
+        660
+      ],
+      "id": "07a79f4d-e957-4d86-8a2f-88f3e1787db0",
+      "name": "Gmail",
+      "webhookId": "83a384ae-cfa7-4aab-85eb-1ec034721092",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "IokBtq93nPyyaQsm",
+          "name": "Gmail divisual@divisualproject.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2920,
+        1220
+      ],
+      "id": "140175ef-d1f1-4255-b032-9bb2355f1987",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        840
+      ],
+      "id": "10edf297-4586-4e83-b087-35fcda2f690e",
+      "name": "Code"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        3240,
+        1060
+      ],
+      "id": "2600d103-3024-4d2f-8755-990764ea65c7",
+      "name": "Execute Command"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        3240,
+        880
+      ],
+      "id": "4ae58871-a9cf-4468-b701-1e4fb80c66c7",
+      "name": "Execute Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleChat",
+      "typeVersion": 1,
+      "position": [
+        3540,
+        880
+      ],
+      "id": "1dbd6b5b-cdf9-4a66-b4d9-aca8a351200b",
+      "name": "Google Chat",
+      "webhookId": "daae5d0f-1e1b-4b2e-8fb3-6d52e9420600"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "sendAndWait",
+        "user": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        3540,
+        1060
+      ],
+      "id": "3248c4e7-3c79-4b01-82d3-d3d32a0fff8f",
+      "name": "Slack",
+      "webhookId": "a3fbce3a-b39d-440b-9fbc-5f5c1a61a799",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "2plCpCwZilPIJk2i",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2620,
+        2060
+      ],
+      "id": "4b3e35b3-92e6-414a-9e8f-7a701cb2def4",
+      "name": "Gmail1",
+      "webhookId": "f4fefdb7-29b9-4564-9a73-76685a2dc9ed",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "IokBtq93nPyyaQsm",
+          "name": "Gmail divisual@divisualproject.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        2620,
+        2240
+      ],
+      "id": "ee03b28b-2dfd-4ca5-8076-12fd3ce63aeb",
+      "name": "WhatsApp Business Cloud",
+      "webhookId": "49d5d511-310b-4e80-ae7e-c8dbca8c1fe8"
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2620,
+        2440
+      ],
+      "id": "323dda60-ac73-47fa-bc09-6106a8f68cf0",
+      "name": "Telegram",
+      "webhookId": "666a9f92-da5f-4f89-9328-0b914bfde47c"
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2620,
+        2640
+      ],
+      "id": "e7d63da5-2a5c-4e40-9a22-3286a11cab19",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "i8uAjlC8WiPjtIsA",
+          "name": "Google Sheets divisual@divisualproject.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "base",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2620,
+        2860
+      ],
+      "id": "77a7f724-b97c-4326-8049-ced12f486bf1",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "RrdWqfxg05McpiOA",
+          "name": "Airtable Personal Access Token account - DASHBOARD DIVISUAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2620,
+        3080
+      ],
+      "id": "4ad6cbc1-907c-40cc-8131-63427decadca",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "TrIfs3ZaDjkdeNCP",
+          "name": "Google Drive projectdivisual@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2620,
+        3280
+      ],
+      "id": "10995b3a-21fb-4409-b06d-8db872d10ee7",
+      "name": "Google Docs",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "r10ZHLluqhI3trN4",
+          "name": "Google Docs account - projectdivisual@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "company",
+        "operation": "update",
+        "companyId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "updateFields": {}
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.1,
+      "position": [
+        2940,
+        2060
+      ],
+      "id": "0cb0af1b-8ead-41d3-a55c-0e608d7994ea",
+      "name": "HubSpot"
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.zohoCrm",
+      "typeVersion": 1,
+      "position": [
+        2940,
+        2240
+      ],
+      "id": "589af428-e9c8-45c0-97fe-9cdd9c14c94c",
+      "name": "Zoho CRM"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "product",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        2940,
+        2440
+      ],
+      "id": "73839660-8ca2-45fc-b415-5b040db7c969",
+      "name": "Shopify",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "tEZnd6FoJBR6SQqb",
+          "name": "Shopify Access Token account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "order",
+        "operation": "create",
+        "additionalFields": {},
+        "billingUi": {},
+        "couponLinesUi": {},
+        "feeLinesUi": {},
+        "lineItemsUi": {},
+        "metadataUi": {},
+        "shippingUi": {},
+        "shippingLinesUi": {}
+      },
+      "type": "n8n-nodes-base.wooCommerce",
+      "typeVersion": 1,
+      "position": [
+        2940,
+        2640
+      ],
+      "id": "c577ad05-f45f-4075-9cf8-e06388ffaaeb",
+      "name": "WooCommerce"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        2940,
+        2860
+      ],
+      "id": "d4c0828c-b274-4342-ab45-940522cb37f1",
+      "name": "Facebook Graph API",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "s0iEtCBvF37hLUpb",
+          "name": "Facebook Graph account - SandBox"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.googleAds",
+      "typeVersion": 1,
+      "position": [
+        2940,
+        3080
+      ],
+      "id": "8f0cce3f-e85e-41a6-af19-e1f3c4dc544c",
+      "name": "Google Ads"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "get",
+        "pageId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        2940,
+        3280
+      ],
+      "id": "a9abdcd7-c526-4ff0-a08d-b4e1106e71ca",
+      "name": "Notion",
+      "credentials": {
+        "notionApi": {
+          "id": "xZUpgHO8ZB8OLOJ1",
+          "name": "Notion - Divisual Project [General]"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "topic": "orders/create"
+      },
+      "type": "n8n-nodes-base.shopifyTrigger",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        1280
+      ],
+      "id": "6e78d3e6-66e9-44ff-bd15-318e1bb7f9c7",
+      "name": "Shopify Trigger",
+      "webhookId": "fada96be-096d-413a-8794-af95a6ab4384",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "tEZnd6FoJBR6SQqb",
+          "name": "Shopify Access Token account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": ""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        3460,
+        1260
+      ],
+      "id": "9fbdaeb0-9e5c-4ed9-a19c-828aee60a194",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        3380,
+        1480
+      ],
+      "id": "85cb6712-a643-468a-bf3d-f08c8d3c0564",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "8hgw1j72mroqso8Q",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# 🚀 La Tribu Divisual\n\n\n## Accede a **La Tribu Divisual** para aprender a crear agentes más avanzados y a generar altos ingresos con ellos de forma real y segura.\n\n# 👉 [Click aquí para unirte a la Lista de espera](https://divisualproject.academy/)\n",
+        "height": 320,
+        "width": 760,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4040,
+        760
+      ],
+      "id": "f8512424-6118-4175-8289-16473b941b4a",
+      "name": "Sticky Note10"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Set - Data Transformation": {
+      "main": [
+        []
+      ]
+    },
+    "Gmail1": {
+      "main": [
+        []
+      ]
+    },
+    "Email Trigger (IMAP)": {
+      "main": [
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request - Core Action": {
+      "main": [
+        []
+      ]
+    },
+    "Gmail": {
+      "main": [
+        []
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        []
+      ]
+    },
+    "Shopify Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "Slack": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "RSS Feed Trigger": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e53abb4d-181a-4395-b7fa-3549c463d18f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2723e5c0cdf73e609a9d6131a4145b2656ca7463c71fa761a441dc255964ffd8"
+  },
+  "id": "NN58GCqaOXkoqlgB",
+  "tags": [
+    {
+      "createdAt": "2025-06-01T18:57:05.689Z",
+      "updatedAt": "2025-06-01T18:57:05.689Z",
+      "id": "uhDg4e01CCZHetVc",
+      "name": "Curso Adrián Sáenz"
+    }
+  ]
+}
