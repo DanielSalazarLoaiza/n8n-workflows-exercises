@@ -1,0 +1,278 @@
+{
+  "name": "Example-Bot-Slzr1-Bot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "18e7110f-c895-4b79-89da-2194c8cbb774",
+      "name": "Telegram Trigger",
+      "webhookId": "3b7a67cb-0cf0-448f-9ed0-03b9a7386bd1",
+      "credentials": {
+        "telegramApi": {
+          "id": "WgZ4CBAZZiTGf4uW",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Eres un asistente que se encarga de gestionar el envío de correos electrónicos. \nPrimero, consultas tu base de contactos en \"contactos\" y usando la herramienta de \n\"enviar_correo\" siempre. Respeta el salto de línea tras el saludo del cuerpo.\n\nEnvía un correo a la persona solicitada por: {{ $json.message.text }}\n\nCada correo debe estar estructurado de la siguiente manera:\n\nAsunto: (Incluye un título breve y claro que resuma el propósito del correo).\nCuerpo: (Escribe el mensaje completo, asegurándote de seguir una estructura \nlógica con introducción, desarrollo y cierre).\nFirma: (Añade la firma proporcionada por el usuario, si aplica).\n\nReglas clave:\n- Siempre redacta el correo directamente según la solicitud del usuario, \n  sin necesidad de confirmación adicional.\n- Adapta el tono y el contenido según las instrucciones específicas que reciba.\n- El correo debe ser claro, directo y cumplir el propósito indicado.\n\nEjemplo de estructura:\n\nAsunto: Solicitud de información sobre el proyecto X\n\nCuerpo:\nHola [Nombre],\nEspero que este mensaje te encuentre bien. Quería solicitar información \nadicional sobre el proyecto X, específicamente en relación con \n[detalle proporcionado].\nQuedo a la espera de tu respuesta. Gracias de antemano.\n\nSaludos,\n\n---\n\nCorreo 1: Solicitud de Información\nAsunto: Solicitud de información sobre el servicio X\nCuerpo:\nHola [Nombre del Destinatario],\nEspero que este mensaje te encuentre bien. Estoy interesado en conocer \nmás detalles sobre el servicio X, especialmente en lo relacionado con \n[tema específico]. Agradecería mucho si pudieras enviarme información \nadicional o concertar una llamada para resolver mis dudas.\nQuedo atento a tu respuesta.\nSaludos,\n\n---\n\nCorreo 2: Confirmación de Reunión\nAsunto: Confirmación de reunión para el [Fecha]\nCuerpo:\nEstimado/a [Nombre del Destinatario],\nConfirmo nuestra reunión programada para el día [fecha] a las [hora]. \nSi necesitas algún cambio en la hora o en el lugar, no dudes en \ncomunicármelo.\nGracias y quedo a tu disposición para cualquier consulta previa.\nUn saludo,\n\n---\n\nCorreo 3: Agradecimiento\nAsunto: Agradecimiento por tu apoyo en [proyecto/actividad]\nCuerpo:\nHola [Nombre del Destinatario],\nQuería agradecerte por el apoyo brindado en [proyecto/actividad]. \nTu colaboración fue esencial para alcanzar [resultado específico]. \nEspero que podamos seguir trabajando juntos en el futuro.\nMuchas gracias nuevamente.\nUn cordial saludo,\n\n---\n\nCorreo 4: Recordatorio de Pago\nAsunto: Recordatorio de pago pendiente\nCuerpo:\nHola [Nombre del Destinatario],\nEspero que estés bien. Te escribo para recordarte que el pago correspondiente \na [concepto] sigue pendiente. La fecha de vencimiento fue el [fecha]. \nPor favor, házmelo saber si necesitas algún detalle adicional para completar \nla transacción.\nAgradezco tu pronta respuesta.\nSaludos,\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ba0efe1f-999d-4cb2-9098-cde1379f8640",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "1"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "3fc5857f-153c-434d-ba3c-6d9d56b0e075",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1pVsY12XQBwPia6nOLRcMA3mCk79Rd-9-T_tbC5_jE1o",
+          "mode": "list",
+          "cachedResultName": "Example-Bot-Slzr1-Bot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pVsY12XQBwPia6nOLRcMA3mCk79Rd-9-T_tbC5_jE1o/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Contactos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pVsY12XQBwPia6nOLRcMA3mCk79Rd-9-T_tbC5_jE1o/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        384,
+        240
+      ],
+      "id": "f1c3e24f-651c-4f1e-909f-3fc0df6ca401",
+      "name": "contactos",
+      "credentials": {
+        "googleApi": {
+          "id": "TkgQGg0sBkbrjN2D",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "sendTo": "={{ $fromAI(\"correo\") }}",
+        "subject": "={{ $fromAI(\"asunto\") }}",
+        "emailType": "text",
+        "message": "={{ $fromAI(\"mensaje_correo\", \"aquí el cuerpo del correo con salto de linea trás el saludo\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        544,
+        256
+      ],
+      "id": "b6fdd6d5-6cff-4be0-80cd-685b8773ecfe",
+      "name": "enviar_correo",
+      "webhookId": "7836553a-35e1-422b-af68-f36dba3fea6c",
+      "credentials": {
+        "googleApi": {
+          "id": "TkgQGg0sBkbrjN2D",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        560,
+        0
+      ],
+      "id": "4fa155bb-0e1b-48a5-92b3-a46a4e3d716b",
+      "name": "Send a text message",
+      "webhookId": "293272cd-11be-41b8-8c4d-e18bffaba357",
+      "credentials": {
+        "telegramApi": {
+          "id": "WgZ4CBAZZiTGf4uW",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        80,
+        192
+      ],
+      "id": "593392db-f234-4fd6-96a1-20483596b554",
+      "name": "Mistral Cloud Chat Model",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "207lolbEW5I5A98N",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -384,
+        -240
+      ],
+      "id": "1a30ee75-b513-4f00-a4cf-b4d75dcbcbb0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "ExxWadQW7jbuNVbX",
+          "name": "OpenAi account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## OpenAI Chat Model \n** Cobran tokens para usar los servicios de ChatGpt",
+        "height": 272,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        -368
+      ],
+      "typeVersion": 1,
+      "id": "38bbdf4d-d698-4237-b88b-4ef69a1c815b",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "contactos": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "enviar_correo": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "496a638b-ab10-4489-8df4-316adfb8571d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "oPz5APbhiSpxT2g5",
+  "tags": []
+}
