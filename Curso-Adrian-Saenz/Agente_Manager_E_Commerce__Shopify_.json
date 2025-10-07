@@ -1,0 +1,1210 @@
+{
+  "name": "My workflow 6",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.mensaje }}",
+        "options": {
+          "systemMessage": "=Eres un agente de inteligencia artificial especializado en la gestión de un e-commerce. Tu tarea es asistir al usuario (yo) con cualquier solicitud relacionada con operaciones, análisis, consultas o automatización del negocio.\n\n### Capacidades disponibles:\n- Herramientas conectadas: Shopify (pedidos y productos), Meta Ads, facturación, enlaces de pago, verificación de pagos, calculadora.\n- Base de datos vectorial: \"divisual_base_de_conocimientos\", con toda la información relevante de la empresa.\n\n### Instrucciones generales:\n1. Interpreta mi mensaje como una orden directa. No preguntes por confirmaciones si tienes los datos suficientes.\n2. Usa las herramientas necesarias para cumplir con la tarea (pedidos, productos, datos, facturación, etc.).\n3. Si necesitas información, haz una búsqueda semántica en la base de datos vectorial “documents_divisual_project”.\n4. Entrega la respuesta en texto plano, usando un estilo claro y compatible con JSON (no incluyas emojis, comillas curvas, caracteres especiales, ni formato markdown en la respuesta).\n\n### Formato de salida:\n1. Siempre responde en texto plano siguiendo esta estructura semántica:\n\n[Texto explicativo o resultado solicitado]\n\n2. Si tienes que dar números hazlo de esta manera:\n[77 euros con cero centimos]\n\n\nSi no tienes suficiente información para ejecutar correctamente la tarea, solicita los datos necesarios de forma clara.\n\nTu rol es ser proactivo, resolutivo y autónomo.\n\n### Caracteres prohibidos:\n[] * ´\" + /n \\n =\n\nHoy es {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        200,
+        760
+      ],
+      "id": "4acbc83a-4aea-41ea-86fc-ac042ad9dc81",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -200,
+        1340
+      ],
+      "id": "f413c4cc-e0cf-44d6-9fc5-d02d907d0e28",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "8hgw1j72mroqso8Q",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2764b1cc-570d-4003-827f-7931b73a2b02",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -740,
+        380
+      ],
+      "id": "cd89977d-6092-49b5-a4e2-f54345b21337",
+      "name": "Webhook",
+      "webhookId": "2764b1cc-570d-4003-827f-7931b73a2b02"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Edit Fields').item.json.body.data.message._data.id.remote }}",
+        "tableName": "conversaciones_ecommerce_manager",
+        "contextWindowLength": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        1080
+      ],
+      "id": "486767a9-737b-48d6-a99a-9615055417c9",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "CJV8oofuf3ALB6Cp",
+          "name": "Postgres account - Curso N8N Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -320,
+        1080
+      ],
+      "id": "36bdf479-e45c-4e34-abaa-927dc5aee0fd",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "8hgw1j72mroqso8Q",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.data.message._data.type }}",
+                    "rightValue": "=ptt",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "be9dbcd5-0882-4ce9-9822-305865fae492"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6a0ec742-7f93-4ea1-af39-35d410da1c1a",
+                    "leftValue": "={{ $json.body.data.message._data.type }}",
+                    "rightValue": "chat",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "texto"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -200,
+        380
+      ],
+      "id": "a21376a9-804f-4b65-be70-10a222eea796",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        280,
+        240
+      ],
+      "id": "dee96571-b0eb-45ab-b9c1-be12b5aee88c",
+      "name": "OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "8hgw1j72mroqso8Q",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "body.data.media.data",
+        "options": {
+          "fileName": "fe.ogg"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        240
+      ],
+      "id": "1ae37dbd-446c-4ebd-8d90-e9e9f1ce549d",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9ab83bb8-0010-4684-ae19-79e992cb39ea",
+              "name": "body.data.message._data.id.remote",
+              "value": "={{ $json.body.data.message._data.id.remote }}",
+              "type": "string"
+            },
+            {
+              "id": "26e6f1fb-f66d-4080-a01e-9e889cb2156e",
+              "name": "body",
+              "value": "={{ $json.body }}",
+              "type": "object"
+            },
+            {
+              "id": "62738a51-4284-40b5-a761-0dd788569ab6",
+              "name": "text",
+              "value": "={{ $json.body.data.message.body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -480,
+        380
+      ],
+      "id": "a1f4197f-c17b-43e1-ba81-874ed8c61402",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "## ⚙️ Configuración inicial\n\nPrimero configuramos la entrada de información y seteamos ciertos campos que necesitaremos más adelante. 🛠️🗃️\n",
+        "height": 340,
+        "width": 420
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        200
+      ],
+      "id": "96e53f29-3724-4d97-8410-b898d745e56d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 Identificación del formato\n\nAhora lo que hacemos es identificar si la información recibida viene en forma de texto o audio. 📝🔉\n",
+        "height": 420,
+        "width": 220,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        140
+      ],
+      "id": "3ba79bcd-9cb6-408c-a4a3-5be08eab2aad",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## ✨ Aquí ocurre la magia\n\nEl agente interpreta la información, accede\na sus herramientas (base de datos **vectorial** y\n**Shopify** en este caso) y devuelve una información. 🧠📚🔍\n",
+        "height": 960,
+        "width": 1840,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        600
+      ],
+      "id": "fc16839c-3821-4dbf-947b-e9f7ef03b70b",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## 🔁 Conversión de audio a texto\n\nAquí el audio se convierte: el **Base64** del audio se transforma en un archivo y se descarga en **n8n**. Entonces, **n8n** tiene acceso al archivo y es capaz (mediante un nodo de **Transcribe Recording** de **OpenAI**) de transcribir ese audio. 🧾🎙️\n\n➡️ *Pasar de Audio a Texto*\n",
+        "height": 400,
+        "width": 480,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f3e7b218-78c3-43f0-811b-6ba5def5adf4",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b07077dc-5641-4175-8dc1-faf1f795c679",
+              "name": "mensaje",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        280,
+        460
+      ],
+      "id": "0dcf59db-88cf-4a23-b879-413fb44d88fa",
+      "name": "Mapeo de mensaje"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/PEGA_AQUÍ_LA_VOICE_ID",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "output_format",
+              "value": "mp3_44100_128"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $('AI Agent1').item.json.output }}"
+            },
+            {
+              "name": "model_id",
+              "value": "eleven_multilingual_v2"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1820,
+        740
+      ],
+      "id": "a1d7137c-2802-440a-9197-699d40e69b56",
+      "name": "Generación de Voz - Eleven Labs",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "a2p2aAHLY3BC86wz",
+          "name": "Header Auth account - ElevenLabs"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🔉 Generación y envío de audio\n\nAquí se genera el audio con el nodo **\"Generación de Voz - Eleven Labs\"**. Posteriormente, se convierte el archivo (**File**) a **Base64** y, en el último nodo, se envía a **WhatsApp** mediante **WaAPI**. 📤📲🎧\n",
+        "height": 820,
+        "width": 400,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        560
+      ],
+      "id": "cc5e9710-86f5-41a1-838c-9d1bc5f8bb93",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.content }}",
+                    "rightValue": "Texto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "885de69c-8001-421f-ad5e-304003d8106b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1c5b603c-3721-480a-a0ef-97091417afbb",
+                    "leftValue": "={{ $json.message.content }}",
+                    "rightValue": "Audio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1200,
+        380
+      ],
+      "id": "610efe18-ee69-40bf-b424-4939f55ac5b5",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://waapi.app/api/v1/instances/PEGA_AQUÍ_TU_INSTANCE_ID/client/action/send-message",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"chatId\": \"{{ $('Webhook').item.json.body.data.message._data.id.remote }}\",\n  \"message\": \"{{ $('Limpiamos el texto').item.json.cleaned }}\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1780,
+        320
+      ],
+      "id": "2a5036be-614d-4dbf-9677-046f4ea0e28e",
+      "name": "HTTP Request1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "h5YgyQqaFghtUGvf",
+          "name": "Header Auth account - WaAPI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $('AI Agent1').item.json.output }}"
+            },
+            {
+              "content": "En base a la respuesta recibida, determina si la respuesta deberíamos dársela en formato audio o formato texto.\n\nTrata de enviar el 50% de las veces un audio y 50% texto. resérvate el texto para cuando te pida en el mensaje explícitamente que le envíes un texto.\n\nSi tienes que dar datos como enlaces estadísticas, analíticas, inversiones, números, etc siempre envía un \"Texto\".\n\nSimplemente responde: \"Audio\" o \"Texto\"",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        860,
+        380
+      ],
+      "id": "6dc16d1c-908b-45bb-a79f-34af6ed2d028",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "8hgw1j72mroqso8Q",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 📤 Envío de respuesta\n\nAquí simplemente se envía el texto. 📨📝\n",
+        "height": 320,
+        "width": 360,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        160
+      ],
+      "id": "187f71af-0461-4a77-a377-0f55deff85ce",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## 🧾 Formato de respuesta\n\nEste **GPT** considera si la respuesta debe enviarse en formato **audio** o en formato **texto**, según sea más adecuado. 🔊✍️\n",
+        "height": 400,
+        "width": 560,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        820,
+        180
+      ],
+      "id": "bdac62e1-0f1b-4a9c-9006-415089e50e0a",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "product",
+        "operation": "getAll",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.shopifyTool",
+      "typeVersion": 1,
+      "position": [
+        900,
+        1240
+      ],
+      "id": "3d88220c-f73f-47e7-879f-5e21e7cb5a0f",
+      "name": "Shopify - Revisar productos",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "tEZnd6FoJBR6SQqb",
+          "name": "Shopify Access Token account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "additionalFields": {
+          "shippingAddressUi": {
+            "shippingAddressValues": {
+              "firstName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('First_Name', ``, 'string') }}",
+              "lastName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_Name', ``, 'string') }}",
+              "company": "=",
+              "country": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Country', ``, 'string') }}",
+              "address1": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address_Line_1', ``, 'string') }}",
+              "address2": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address_Line_2', ``, 'string') }}",
+              "city": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('City', ``, 'string') }}",
+              "province": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Province', ``, 'string') }}",
+              "zip": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Zip_Code', ``, 'string') }}",
+              "phone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Phone', ``, 'string') }}"
+            }
+          }
+        },
+        "limeItemsUi": {
+          "lineItemValues": [
+            {
+              "productId": "={{ $fromAI(\"product_name\") }}",
+              "variantId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Variant_ID', ``, 'string') }}",
+              "title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', ``, 'string') }}",
+              "grams": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Grams', ``, 'string') }}",
+              "quantity": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Quantity', ``, 'number') }}",
+              "price": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Price', ``, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.shopifyTool",
+      "typeVersion": 1,
+      "position": [
+        760,
+        1240
+      ],
+      "id": "9d5d9638-9426-48c9-9d33-15e93d2e2da4",
+      "name": "Shopify - Crear pedido",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "tEZnd6FoJBR6SQqb",
+          "name": "Shopify Access Token account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "operation": "update",
+        "orderId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Order_ID', ``, 'string') }}",
+        "updateFields": {
+          "email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email', ``, 'string') }}",
+          "note": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Note', ``, 'string') }}",
+          "shippingAddressUi": {
+            "shippingAddressValues": {
+              "firstName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('First_Name', ``, 'string') }}",
+              "lastName": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_Name', ``, 'string') }}",
+              "company": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Company', ``, 'string') }}",
+              "country": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Country', ``, 'string') }}",
+              "address1": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address_Line_1', ``, 'string') }}",
+              "address2": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Address_Line_2', ``, 'string') }}",
+              "city": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('City', ``, 'string') }}",
+              "province": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Province', ``, 'string') }}",
+              "zip": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Zip_Code', ``, 'string') }}",
+              "phone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Phone', ``, 'string') }}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.shopifyTool",
+      "typeVersion": 1,
+      "position": [
+        620,
+        1240
+      ],
+      "id": "95546698-7a9a-4d5f-b671-836bae74f272",
+      "name": "Shopify - Actualizar pedido",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "tEZnd6FoJBR6SQqb",
+          "name": "Shopify Access Token account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "divisual_base_de_conocimientos",
+        "toolDescription": "BUsca la historia de divisual",
+        "tableName": {
+          "__rl": true,
+          "value": "historia_de_divisual",
+          "mode": "list",
+          "cachedResultName": "historia_de_divisual"
+        },
+        "topK": 50,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        -40,
+        1160
+      ],
+      "id": "e25dba1a-33ae-4b0b-bfca-3e3a235f120d",
+      "name": "Información de la empresa",
+      "credentials": {
+        "supabaseApi": {
+          "id": "sLElF6DECb2rGUdK",
+          "name": "Supabase account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        1240
+      ],
+      "id": "c8aadd67-3965-4427-8634-0e2211501515",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "name": "extractos_kpis_meta_ads",
+        "description": "utiliza esta herramienta para recolectar datos y kpis de las campañas de Meta Ads",
+        "workflowId": {
+          "__rl": true,
+          "value": "LrAeweN4LaM2D2FC",
+          "mode": "list",
+          "cachedResultName": "Extractor KPIs de Meta Ads"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.1,
+      "position": [
+        300,
+        1240
+      ],
+      "id": "8eca8976-aa30-4211-accc-1d1966fbff26",
+      "name": "Extraer Datos Meta Ads"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "operation": "getAll",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "options": {
+          "createdAtMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Created_At_Min', ``, 'string') }}",
+          "createdAtMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Created_At_Max', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.shopifyTool",
+      "typeVersion": 1,
+      "position": [
+        460,
+        1240
+      ],
+      "id": "90ffc8e9-212a-4b83-b4d4-cfaaba1c2dc9",
+      "name": "Shopify - Comprobar pedidos",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "tEZnd6FoJBR6SQqb",
+          "name": "Shopify Access Token account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Utiliza esta herramienta para actualizar informaciónd e los productos",
+        "authentication": "accessToken",
+        "resource": "product",
+        "operation": "update",
+        "productId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Product_ID', ``, 'string') }}",
+        "updateFields": {
+          "title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.shopifyTool",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        1240
+      ],
+      "id": "de0f45ff-d00a-4e08-9b39-7ab1a811aa63",
+      "name": "Shopify - Actualizar productos",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "tEZnd6FoJBR6SQqb",
+          "name": "Shopify Access Token account - Curso Adri"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        960
+      ],
+      "id": "0a076a54-1b23-41be-bac1-62f570f4ebd9",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const originalText = $input.first().json.output;\n\n  if (typeof originalText !== 'string') {\n    return {\n      json: {\n        error: 'El campo \"text\" no existe o no es un texto',\n        original: originalText\n      }\n    };\n  }\n\n  let cleaned = originalText\n    .replace(/<[^>]*>/g, '')                     // Quitar HTML\n    .replace(/\\r?\\n|\\r/g, ' ')                   // Saltos de línea a espacio\n    .replace(/\\t+/g, ' ')                        // Tabs a espacio\n    .replace(/[^\\p{L}\\p{N},.¿?:?\\s]+/gu, '')     // Mantener letras, números, , . : ¿ ? y espacios\n    .replace(/\\s+/g, ' ')                        // Normalizar múltiples espacios\n    .trim();                                     // Quitar espacios extremos\n\n  return {\n    json: {\n      cleaned\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        580,
+        760
+      ],
+      "id": "66a8a43a-f034-47e5-9cf3-e7498231a9ff",
+      "name": "Limpiamos el texto"
+    },
+    {
+      "parameters": {
+        "content": "# 🛠️ Herramientas Utilizadas\n\n| Herramienta      | Descripción                                                                                                                                              | Coste mensual          |\n|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|\n\n| **WaAPI**        | Conexión con la API de WhatsApp.                                                                                                                         | $6                      |\n| **ChatGPT**      | Transcripción de audios e interpretación de mensajes.                                                                                                    | Pago por tokens *(variable)* |\n\n| **Supabase**     | Base de datos PostgreSQL para la memoria del agente y base vectorial para almacenar info de la empresa.                                                  | $0 *(versión gratuita)* |\n\n| **Shopify**      | Plataforma para alojar la web. El coste depende del plan contratado, sin coste adicional por conectarlo con N8N.                                        | *(según plan)*          |\n\n| **ElevenLabs**   | Generación de audio para las respuestas del agente.                                                                                                      | $11                     |\n\n\n---\n\n## 💰 Coste Total Mensual Estimado\n\n### **$6 (WaAPI) + $11 (ElevenLabs) = $17/mes + tokens usados en ChatGPT + plan de Shopify**\n\nPD: Podríamos prescindir de ElevenLabs si las respuestas del agente las queremos solo en texto. Esto supondría una inversión total de solo **$6/mes**\n\n---\n\n**Hecho con ❤️ por [Juan Pe Navarro](https://www.youtube.com/@juanpe.divisual)**\n",
+        "height": 700,
+        "width": 780,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1180,
+        600
+      ],
+      "id": "08071dc7-44de-4c99-a17b-61cae399372d",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "# 🚀 La Tribu Divisual\n\n## Este agente tiene un valor en el mercado de **$2.997.**\n\n## Accede a **La Tribu** para aprender a crear agentes más avanzados y a generar altos ingresos con ellos de forma real y segura.\n\n# 👉 [Click aquí para unirte a la Lista de espera](https://divisualproject.academy/)\n",
+        "height": 360,
+        "width": 740,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        1020
+      ],
+      "id": "ba034e52-7160-43c5-85f3-eadeaedb3bfc",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://waapi.app/api/v1/instances/70972/client/action/send-media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chatId",
+              "value": "={{ $('Webhook').item.json.body.data.message._data.id.remote }}"
+            },
+            {
+              "name": "mediaBase64",
+              "value": "={{ $json.data }}"
+            },
+            {
+              "name": "asVoice",
+              "value": "true"
+            },
+            {
+              "name": "mediaName",
+              "value": "audioo.mp3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1820,
+        1200
+      ],
+      "id": "afa55a2c-3e88-4c9e-abe0-3e76a9ee5bee",
+      "name": "HTTP Request - Respuesta Whatsapp",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "h5YgyQqaFghtUGvf",
+          "name": "Header Auth account - WaAPI"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Generador de video": {
+      "main": [
+        [
+          {
+            "node": "30 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Información de la empresa",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Limpiamos el texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mapeo de mensaje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Mapeo de mensaje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mapeo de mensaje": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generación de Voz - Eleven Labs": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Generación de Voz - Eleven Labs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify - Revisar productos": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify - Crear pedido": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify - Actualizar pedido": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Información de la empresa": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Datos Meta Ads": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify - Comprobar pedidos": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify - Actualizar productos": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request - Respuesta Whatsapp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpiamos el texto": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9ac2f7d8-14c8-4cdd-b0cf-dd6f4691a1ed",
+  "meta": {
+    "instanceId": "2723e5c0cdf73e609a9d6131a4145b2656ca7463c71fa761a441dc255964ffd8"
+  },
+  "id": "JgLJz456oriiL7W9",
+  "tags": [
+    {
+      "createdAt": "2025-05-13T08:00:58.464Z",
+      "updatedAt": "2025-05-13T08:00:58.464Z",
+      "id": "IxHXOpyTZspV9j2o",
+      "name": "La Tribu Divisual"
+    },
+    {
+      "createdAt": "2025-06-01T18:57:05.689Z",
+      "updatedAt": "2025-06-01T18:57:05.689Z",
+      "id": "uhDg4e01CCZHetVc",
+      "name": "Curso Adrián Sáenz"
+    }
+  ]
+}
