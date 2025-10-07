@@ -1,0 +1,131 @@
+{
+  "name": "Slzr-Amount-Users",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        0
+      ],
+      "id": "99ebf51c-7706-4078-b4da-d89325edda7a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b04b72cb-bff5-45ce-8072-6a5676d27a62",
+              "name": "users",
+              "value": "[\"slzr\", \"valeria\", \"daniel\"]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        0
+      ],
+      "id": "7b6b0edd-c800-4802-a873-5245563bc2fc",
+      "name": "Users"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "4176e100-2a8e-4b33-b137-0717e797138f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se crea un Array con los usuarios.** ",
+        "height": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "251a44cb-ff10-4f84-aaf0-0b970480248b",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Ingresamos el código JavaScript donde se llaman los usuarios y se usa el length para poder ver la cantidad de usuarios que se encuentran en el momento.** ",
+        "height": 320,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        192,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "7d1ea8be-6b92-4bfd-a468-ba12780778aa",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const users = $input.first().json.users;\nreturn [{ amountUsers: users.length }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        0
+      ],
+      "id": "809f14bd-d6b2-4992-9dad-bb1c56d94636",
+      "name": "Amount Users"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Users",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Users": {
+      "main": [
+        [
+          {
+            "node": "Amount Users",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "60c8ab2c-63f9-42ec-891c-02ad5ebe383d",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "QvzDyCgaGX7WRaQf",
+  "tags": []
+}
