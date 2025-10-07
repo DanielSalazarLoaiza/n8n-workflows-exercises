@@ -1,0 +1,139 @@
+{
+  "name": "Slzr-Create-And-Save-Text-File",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "78ba9359-93bc-4fb1-917c-b9f251f7cde0",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"content\": \"Archivo generado por n8n. Created by Daniel Salazar Loaiza.\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "39a27da1-52b9-49bc-bbc2-7515ab7ab39c",
+      "name": "Content"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "content",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        496,
+        0
+      ],
+      "id": "06fb6f22-8d98-4e1d-a3b0-da388764fa1c",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "9c15a34e-9b6a-4ef7-b2ff-3f3122b917f8",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se crea un JSON con el contenido de lo que llevara el archivo** ",
+        "height": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "7836aeee-1fc5-4e58-b3ce-58b3261074bb",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Convert to File\n**Se trae el contenido ingresado en el JSON y se convierte a un archivo de texto** ",
+        "height": 288,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "a2108963-4f80-43a8-99d2-ee9ca790c34e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Crear y guardar un archivo de texto\n**Objetivo:**  Generar un archivo .txt con contenido dinámico.",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -336,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "e627a2dc-28ec-4dfe-bc6a-5da4c8e28213",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Content": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e4ceb6c8-ed7a-4133-9cd6-fc66f437f7d5",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "LC8ls6ZdG3RoqsZP",
+  "tags": []
+}
