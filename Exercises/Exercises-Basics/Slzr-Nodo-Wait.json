@@ -1,0 +1,178 @@
+{
+  "name": "Slzr-Nodo-Wait",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        0
+      ],
+      "id": "ba758448-c44f-4afc-8130-9b8b704ad461",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"message\": \"Inicio del flujo...\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        0
+      ],
+      "id": "f3899fac-ad66-4bdd-8d20-6459c8a07e37",
+      "name": "Init Flow"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        432,
+        0
+      ],
+      "id": "403956c6-dd70-4aa1-b4d6-12313aa5f9de",
+      "name": "Wait",
+      "webhookId": "b76751da-f423-4206-80ad-89946964ad91"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"message\": \"{{ $json.message }} flujo reanudado despues de esperar 5 segundos.\"\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        688,
+        0
+      ],
+      "id": "27373f89-968d-4203-be8b-d15c7234804a",
+      "name": "Resume March"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -144,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "1a80eb85-e4d3-4dce-b87c-1acb4c979dda",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Mediante un JSON se le manda un mensaje que transportara al siguiente nodo** ",
+        "height": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        112,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "f6207c7c-c868-44be-95d6-eaa22b05b712",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Wait\n**Nodo Wait configurado para que pare 5 segundos y siga al siguiente nodo**",
+        "height": 272,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "c1b4f4c1-936d-4aa7-beac-295fe6f3de8e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Mediante un JSON recibe el mensaje anterior y se le ingresa un nuevo mensaje indicando el tiempo de espera** ",
+        "height": 304,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        624,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "3479cee7-d961-4932-ab2b-f1b86725d79c",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Nodo Wait\n**Objetivo:** Detener la ejecución por unos segundos.",
+        "height": 96,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -400,
+        -256
+      ],
+      "typeVersion": 1,
+      "id": "322003cb-2cb0-4f99-802d-1fd364733438",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Init Flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Init Flow": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Resume March",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "47ff1d59-b566-4119-b6cd-8cf6c004c8c4",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "x9pf9ZCRd3VAImdt",
+  "tags": []
+}
