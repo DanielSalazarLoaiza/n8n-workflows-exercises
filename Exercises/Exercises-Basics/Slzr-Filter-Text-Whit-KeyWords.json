@@ -1,0 +1,221 @@
+{
+  "name": "Slzr-Filter-Text-Whit-KeyWords",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "6ae50d39-01f6-4994-bdea-19695de20240",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"phrase\": \"Hola, me llamo Daniel Salazar Loaiza\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "99c628c8-ee68-4655-82f8-d9b2ee43a848",
+      "name": "Phrase"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cfccd0b1-460f-4f0b-b94e-c881dc938f0f",
+              "leftValue": "={{ $json.phrase }}",
+              "rightValue": "Daniel",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        0
+      ],
+      "id": "14c725a5-3e1b-4d9e-89db-163e89a1b177",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"response\": \"Si Contiene la palabra esperada\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        -176
+      ],
+      "id": "8a5db3c3-4cae-405e-abd4-729c59980892",
+      "name": "Contains"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"response\": \"No Contiene la palabra esperada\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        96
+      ],
+      "id": "0d7c619d-cdde-4ce9-b520-0e033d7b442e",
+      "name": "Does not contain"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger \n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "578d4062-e9d8-42eb-9924-813196ff79e0",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se crea la frase que se evaluara**",
+        "height": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "78113abf-33e0-4a82-a79a-ef2cb01f23ae",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## IF\n**Si Contiene la palabra establecida será true, en caso de que no tenga la palabra esperada será false** ",
+        "height": 288,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "0c037217-f01c-48d9-94c4-1579f1884864",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields \n**Si Contiene la palabra esperada**",
+        "height": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        688,
+        -272
+      ],
+      "typeVersion": 1,
+      "id": "93fd8c60-1d5b-4da7-bc8e-03c490a30acf",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields \n**No Contiene la palabra esperada**",
+        "height": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        688,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "1cf98b4b-0781-44fb-a1ae-30ee4be378b7",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Phrase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phrase": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Contains",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Does not contain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "77770e0a-4948-47d0-b455-560df60fbf0c",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "2eYmKONzJdY6GUFt",
+  "tags": []
+}
