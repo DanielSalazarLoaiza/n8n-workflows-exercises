@@ -1,0 +1,146 @@
+{
+  "name": "Slzr-Number-Even-Or-Odd",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4eeec52f-c26f-4ca9-af23-ed546416781d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e0d164ca-8392-45cf-bf45-b8bfa522d67a",
+              "name": "number",
+              "value": 18,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "8f85815c-3555-4c32-a37f-ec664ca977d1",
+      "name": "Number"
+    },
+    {
+      "parameters": {
+        "jsCode": "const number = $input.first().json.number;\nconst result = (number % 2 === 0) ? `${number} es un número par.` : `${number} es un número impar.`;\n\nreturn [{ number, result }]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        0
+      ],
+      "id": "ea730541-8b40-4049-88f3-3dc304d0f2a4",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "03d3f755-f1f0-4936-ba61-cbc69b9ac7b2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se define el numero que se quiere comprobar si es par o impar** ",
+        "height": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "ca5867fc-3a2a-4645-ae75-3db40f3b9d5f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Se ingresa el código JavaScript para comprobar si el número es par o impar** ",
+        "height": 256,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "ef4fe50d-d453-4dfe-92b8-6aea02751bf6",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Detectar si un número es par o impar\n**Objetivo:** Leer un número, verificar si es par o impar y mostrar el resultado.",
+        "height": 176,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -336,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "a30b64cb-a53d-4420-a45d-13bab113e7fe",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Number": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0a0b7bd4-89f8-4dd7-8d9c-afc50c88bba6",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "w7DzIx4E5uzY1ps9",
+  "tags": []
+}
