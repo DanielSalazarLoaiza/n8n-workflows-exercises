@@ -1,0 +1,229 @@
+{
+  "name": "Slzr-Nodo-IF",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        0
+      ],
+      "id": "69e634ee-83c5-44e6-9838-0816c006a88f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4ed66409-78cd-448f-b5a8-0e322ece8189",
+              "name": "edad",
+              "value": 18,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        48,
+        0
+      ],
+      "id": "00de4e9b-37f1-4eac-9435-a28d26eda99a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7d40a6d8-a91f-46aa-9d32-93c515d7170d",
+              "leftValue": "={{ $json.edad }}",
+              "rightValue": 18,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        0
+      ],
+      "id": "9321ae1b-d3a9-4ac8-8e99-6036669ddafb",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"status\": \"aprobado\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        624,
+        -112
+      ],
+      "id": "11a34055-fc55-44de-8835-90d2e76598ce",
+      "name": "Aprobado"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"status\": \"no aprobado\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        624,
+        176
+      ],
+      "id": "b06edc04-f141-4af4-9a0f-b6c0d1a77002",
+      "name": "No Aprobado"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -288,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "adabb920-67c0-40fb-8279-b5336fb470c0",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Creamos la variable con la edad** ",
+        "height": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -16,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "351c4a9a-2757-4483-9e87-187cd46c6328",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## IF\n**Si la persona tiene 18 o más años será aprobado, en caso contrario no será aprobado** ",
+        "height": 272,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        256,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "8d6b781d-284c-40d4-b070-5b6e7ac9fbeb",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## No Aprobado\n**En caso de tener menos de 18 años** ",
+        "height": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        64
+      ],
+      "typeVersion": 1,
+      "id": "144df383-61d6-4fdb-bf87-a16cd342b0ff",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Aprobado\n**En caso de tener 18 años o más** ",
+        "height": 240,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "6d98bade-4990-41ae-a331-1d0244ed6f3a",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Aprobado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Aprobado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2929e0e9-16b6-4d07-baf3-239080fa8a6b",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "pBH4JFVDvkJ5YQLK",
+  "tags": []
+}
