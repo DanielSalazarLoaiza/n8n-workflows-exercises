@@ -1,0 +1,145 @@
+{
+  "name": "Slzr-Counter-Increment",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "bf400976-c1ed-4fa3-9603-b50276b352ea",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).**",
+        "height": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "f9cbc69d-2913-45d1-880e-d05df281a112",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se crea la variable run con el número predeterminado de 1** ",
+        "height": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "87e27fa6-8e8c-4451-9a13-196cc4e7348d",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0bae7689-3f43-4eca-9cac-ed543c4db0e0",
+              "name": "run",
+              "value": 1,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "b51642de-71c0-43ca-89f4-b4e0d0571b2e",
+      "name": "run"
+    },
+    {
+      "parameters": {
+        "jsCode": "const count = $input.first().json.run ?? 0;\n\nreturn  [{ count: count + 1 }];\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        512,
+        0
+      ],
+      "id": "ff5e6726-098f-4400-a4ce-15afce2d0865",
+      "name": "Count"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Se crea la función para que el número incremente +1 cuando se ejecuta**",
+        "height": 272,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "01ce6fe0-f724-4f64-aae9-7364ae6d9308",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Contador incremental\n**Objetivo:** Simular un contador que aumente cada vez que se ejecuta el flujo.",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -336,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "e948720a-8aea-4f99-8836-c28f33aff522",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "run": {
+      "main": [
+        [
+          {
+            "node": "Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b307a291-d3e6-4e07-8532-ab0af239082c",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "eSWSBaXkrohnidMX",
+  "tags": []
+}
