@@ -1,0 +1,106 @@
+{
+  "name": "Slzr-Run-Flow-Every-Hour",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        0
+      ],
+      "id": "b8939b38-6cb1-4814-a2a8-73a01d9468c3",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "content": "## Cron Trigger\n**Se activa dependiendo del tiempo establecido en este, en este caso cada 1 hora** ",
+        "height": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -64,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "48e6e07f-70ed-40cf-b2c3-0a739ff84e1c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se le ingresa código JSON para poder mandar el mensaje establecido en el JSON** ",
+        "height": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        208,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "659c3003-b4fd-4b37-9e75-ed5b7c56723c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"message\": \"Este mensaje se esta ejecutando cada 1 hora.\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        272,
+        0
+      ],
+      "id": "a8ca8657-afa0-4a58-b533-bfda3540a01c",
+      "name": "Message"
+    },
+    {
+      "parameters": {
+        "content": "## Ejecutar flujo cada hora\n**Objetivo:**  Crear un flujo recurrente.",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "ec6cdd1c-158b-4ddf-a50e-1188effe02c6",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "93a2f1a3-c176-4bdb-ab36-cfc1d2c49ca9",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "stVXZiHyfFQCwAzW",
+  "tags": []
+}
