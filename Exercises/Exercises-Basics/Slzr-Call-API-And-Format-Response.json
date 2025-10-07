@@ -1,0 +1,136 @@
+{
+  "name": "Slzr-Call-API-And-Format-Response",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "795650e2-3468-43ca-87df-ac8903c3ba04",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://api.agify.io/?name=daniel",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        0
+      ],
+      "id": "e27c92c6-de4a-4650-8f42-f8204a4983de",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const name = $input.first().json.name;\nconst age = $input.first().json.age;\n\nreturn [{ message: `${name} tiene aproximandamente ${age} años` }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        0
+      ],
+      "id": "171add9d-79c9-46fc-aa3f-f6920d6fc3ab",
+      "name": "Simplify your exit"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger \n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).**",
+        "height": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "8ee0f153-e475-4708-96f3-c650f54e534b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## HTTP Request\n**Ingresamos la URL de la API que queremos llamar**",
+        "height": 272,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "97e4d5aa-1201-4043-8341-df955ac9c5be",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Simplificamos la salida del audio para no devolver un JSON sino un mensaje** ",
+        "height": 272,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "4bd509fe-d08d-4069-be69-69aa1c9cd571",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Llamar a una API y formatear la respuesta\n**Objetivo:** Consultar una API y simplificar su salida.",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "df830cc0-3b21-4767-9867-6dfc5ffc144d",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Simplify your exit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d096ee54-47da-4c9d-9c22-061ae099f90f",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "XM8nQi2RTAvC60Df",
+  "tags": []
+}
