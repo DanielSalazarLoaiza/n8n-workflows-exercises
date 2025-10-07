@@ -1,0 +1,151 @@
+{
+  "name": "Slzr-Concatenate-Text-Dynamic-Values",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        0
+      ],
+      "id": "70f26be0-e753-4600-be16-cafe063eb876",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "335858f3-e846-4e80-8bab-2ccfe74d7ae9",
+              "name": "name",
+              "value": "Daniel Salazar Loaiza",
+              "type": "string"
+            },
+            {
+              "id": "6964255d-adcf-4669-8407-0b858d1f6175",
+              "name": "day",
+              "value": "Martes",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d6bc7bcb-f019-4c05-964e-7cbd3ac87181",
+      "name": "Data - Name and Day"
+    },
+    {
+      "parameters": {
+        "jsCode": "const name = $input.first().json.name;\nconst day = $input.first().json.day;\n\nreturn [{ message: `Hola ${name}, Feliz ${day}!` }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        0
+      ],
+      "id": "88431c9d-2b5d-4c55-b1bb-2d48f9913d18",
+      "name": "Message"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "e5ded089-9554-4936-bf04-3c3159a01c45",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se le ingresan los valores de name and day con valores predeterminados** ",
+        "height": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        160,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "10c3f00a-b105-4d36-932f-0bb495d0e11f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Se llaman los datos del Edit Fields para poder concatenarlos en un mensaje y dar un feliz dia** ",
+        "height": 288,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "7c5d5f0a-d674-4749-9ef5-fb7e37c57232",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Concatenar texto con valores dinámicos\n**Objetivo:**  Crear frases automáticas usando variables.",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -384,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "f1029eaa-ed23-4e61-8f2e-222a7cde4767",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Data - Name and Day",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data - Name and Day": {
+      "main": [
+        [
+          {
+            "node": "Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9086e075-5035-47cb-81cd-929ccd327375",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "qrZRliXzyrpCLLB4",
+  "tags": []
+}
