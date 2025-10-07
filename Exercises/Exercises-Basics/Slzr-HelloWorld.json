@@ -1,0 +1,97 @@
+{
+  "name": "Slzr-HelloWorld",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        0
+      ],
+      "id": "9579962e-91a1-44f2-8645-b5e73fa46733",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3363db8-f4c8-4a00-9923-bcd386b6ef77",
+              "name": "message",
+              "value": "Hello World, My name is Daniel Salazar Loaiza",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "e45ba0b0-33a7-4630-8f15-fbd4e6bfee57",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -96,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "b4664cf4-0b29-4d62-a89f-be280ee88811",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**sirve para crear, modificar y organizar datos dentro de un flujo de trabajo** ",
+        "height": 368,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "477ecb7f-7f84-4231-948f-2f6259662dc0",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "076f32a0-e9dd-4498-98bd-04508dc1c545",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "9W6LSXOGzXSFlLmf",
+  "tags": []
+}
