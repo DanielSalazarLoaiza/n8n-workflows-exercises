@@ -1,0 +1,243 @@
+{
+  "name": "Slzr-Value-Comparator-With-IF",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "657b4a37-1399-40ff-84ad-01cbee3718a5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2571cdce-6570-4a51-93bf-5de42e15ec76",
+              "leftValue": "={{ $json.number }}",
+              "rightValue": 10,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        0
+      ],
+      "id": "8960e7f9-f99f-4b8e-b370-d62663a17445",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "be93dd71-ec54-457c-817f-2076b371b9eb",
+              "name": "number",
+              "value": 12,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        0
+      ],
+      "id": "da61b58e-eeb2-4469-8b68-3d1c0dae05f9",
+      "name": "Number"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"message\": \" {{ $json.number }} Es mayor que 10\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        -176
+      ],
+      "id": "c27543be-e8ad-4257-b73a-dca1b7e3b06c",
+      "name": "Es mayor que"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"message\": \"{{ $json.number }}  Es menor que 10\"\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        128
+      ],
+      "id": "b3513456-fdca-4bf4-aa0b-f28bbe4a6912",
+      "name": "Es menor que"
+    },
+    {
+      "parameters": {
+        "content": "## Comparar dos valores y decidir con IF\n**Objetivo:** Revisar si un número es mayor o menor.",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -304,
+        -336
+      ],
+      "typeVersion": 1,
+      "id": "6c9f778c-697e-43c4-acfa-f2ff84dc4f3b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "d098e874-509f-4ee4-989a-2b5b3ba85a0a",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se esta creando la variable number y se le esta ingresando un valor predeterminado** ",
+        "height": 304,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        96,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "9986d77c-f0fb-4e33-a419-2ddd87cb55f2",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## IF \n**Se le esta dando un JSON donde si el numero es mayor a 10 sea verdadero y si es menor sea falso** ",
+        "height": 304,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "113ea3a0-baea-46d7-8e4d-ab9235bcd761",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se le ingresa un código JSON y si es mayor le dira que el numero es mayor que 10**",
+        "height": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        656,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "af34de81-547c-46ce-b322-b02d02411a03",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se le ingresa un código JSON y si es menor le dira que el numero es menor que 10**",
+        "height": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        656,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "d95bb1ed-d123-40ef-a939-c99fe0b8619a",
+      "name": "Sticky Note5"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Number": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Es mayor que",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Es menor que",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e11816c7-a3cf-499a-80e6-adcaaffc15ed",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "lPZgUsdKO6ZQYMYI",
+  "tags": []
+}
