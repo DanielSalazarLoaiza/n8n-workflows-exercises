@@ -1,0 +1,137 @@
+{
+  "name": "Slzr-Extract-Data-JSON",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "93ef02fb-4136-4a8c-b8d4-20cc1417c390",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"person\": {\n    \"name\": \"Daniel Salazar Loaiza\",\n    \"age\": 18,\n    \"city\": \"Manizales\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "d95a2f2d-7a17-4e08-b6d8-3be33c36597d",
+      "name": "Person - Array"
+    },
+    {
+      "parameters": {
+        "jsCode": "const person = {\n  \"name\": $input.first().json.person.name,\n  \"age\": $input.first().json.person.age,\n  \"city\": $input.first().json.person.city\n};\n\nreturn [{ message: `Mi nombre es ${person.name}, soy de la ciudad de ${person.city} y tengo ${person.age} años.` }]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        0
+      ],
+      "id": "a94a7263-fca8-41a2-93f7-21214e59d766",
+      "name": "Data Person"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -128,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "3d82ca15-1a37-4bfe-88aa-812c4ef2a800",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields \n**Se ingresa un código JSON para crear un array con los datos de una persona** ",
+        "height": 304,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        144,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "18da4259-9eca-49f7-9627-f9ea89dccad2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript \n**Ingresamos código JavaScript para poder llamar los datos del JSON y crear un mensaje** ",
+        "height": 304,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        416,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "a8846ef9-156a-4137-8108-b63a8e095b6e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Extraer datos de un JSON \n**Objetivo:**  Acceder a valores dentro de un objeto.",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -384,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "1d7cacc9-e184-47dc-a2a2-5daf0e80c379",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Person - Array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Person - Array": {
+      "main": [
+        [
+          {
+            "node": "Data Person",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "471a1a6f-b1b8-46bd-81b5-d1e1ef4aad78",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "NJGKe8EVP7VAdtgg",
+  "tags": []
+}
