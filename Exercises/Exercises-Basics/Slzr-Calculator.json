@@ -1,0 +1,124 @@
+{
+  "name": "Slzr-Calculator",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const entrada = $input.first().json.entrada; // datos del item actual\nconst a = $input.first().json.entrada.a;\nconst b = $input.first().json.entrada.b;\n\nreturn [\n  {\n    json: {\n      a,\n      b,\n      resultado: a * b,\n      descripcion: `Multiplicación de ${a} por ${b}`\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "a74d4568-e664-4e53-a671-a75ce0e48708",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        0
+      ],
+      "id": "6dafe83e-b21e-4e98-86fc-481cee135520",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"entrada\": {\n    \"a\": 10,\n    \"b\": 2\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "a53b3a43-b6b7-4860-9a83-9d7d29650c62",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -416,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "0a5dfd5d-59f9-4e29-9a84-1b104265f251",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se manda un formato JSON con los numeros a multiplicar** ",
+        "height": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "874d1496-ba4e-49ed-a77a-ae87aff446b7",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Código en JavaScript llamando los inputs del Edit Fields y haciendo la multiplicación, luego un JSON muestra su resultado y descripción** ",
+        "height": 336,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "6f2aafc2-c7d9-4e7e-b27e-e337ed1824c0",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5468bbbb-e410-443c-ae27-f97154241fa5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "66DCXVMUlpHJ9JdT",
+  "tags": []
+}
