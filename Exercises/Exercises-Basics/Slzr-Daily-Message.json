@@ -1,0 +1,101 @@
+{
+  "name": "Slzr-Daily-Message",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 1,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -32,
+        16
+      ],
+      "id": "dbf45127-00aa-4cd8-a42d-76ced85e8fa9",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "chatId": "7372266998",
+        "text": "LLego tu saludo diario hecho por Daniel Salazar Loaiza.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        272,
+        16
+      ],
+      "id": "78901912-cb0d-44ab-9573-efd6fb5db9cc",
+      "name": "Send a text message",
+      "webhookId": "8129d8b6-0114-47e6-97ea-42a81442c945",
+      "credentials": {
+        "telegramApi": {
+          "id": "WgZ4CBAZZiTGf4uW",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Schedule Trigger\n**Se activa dependiendo del tiempo establecido en este, en este caso cada día a la 1:30 a.m.** ",
+        "height": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -96,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "f19d42a7-f719-4e09-a133-866133e12c2d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## SEND A TEXT MESSAGE (TELEGRAM)\n**Se ingresa el ID de la cuenta a la que se quiere mandar el mensaje cada día** ",
+        "height": 368,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        208,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "05d0bc00-b4d7-4cbd-b172-1c43ef4fb9c9",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d93d10e5-df28-4a53-8523-92499c9a17c6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "y6fZFLjyODJKvKQ5",
+  "tags": []
+}
