@@ -1,0 +1,506 @@
+{
+  "name": "My workflow 6",
+  "nodes": [
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "a9bc6faf-877f-4467-8359-0e6b0370b1a6",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        5820,
+        2540
+      ],
+      "name": "Split Out6",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "2d13ca6b-b664-48d5-871b-6595d2d14d2b",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        6320,
+        2800
+      ],
+      "name": "Split Out7",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "d32d4ded-5614-46db-b8ec-f22dd4f32ea1",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        6660,
+        2800
+      ],
+      "name": "Split Out8",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "1708233f-3023-41b5-82d2-efc82dc507cd",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [
+        7160,
+        2540
+      ],
+      "name": "Split Out9",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        6840,
+        2540
+      ],
+      "id": "abfefba5-1af5-4bb4-8585-c3fa2894b308",
+      "name": "Wait",
+      "webhookId": "627a9f05-6a54-4197-a97f-dffd8c184f73"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "28d7bfb5-4d2b-4133-880e-b8c2f6455346",
+              "name": "Ad ID",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "3385c600-4d4d-4756-b04c-dcc2815e7e95",
+              "name": "Ad Name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "11e2bbb6-7422-4e0e-8e03-3532d6f11d5b",
+              "name": "Campaign Name",
+              "value": "={{ $json.campaign.name }}",
+              "type": "string"
+            },
+            {
+              "id": "bc300bdf-3df1-4dbc-b64a-1decd34e0caf",
+              "name": "AdSet Name",
+              "value": "={{ $json.adset.name }}",
+              "type": "string"
+            },
+            {
+              "id": "cf3b0615-d5ff-4f20-9690-146d3bd1a0b2",
+              "name": "Active Status",
+              "value": "={{ $json.effective_status }}",
+              "type": "string"
+            },
+            {
+              "id": "c50c53c9-b36b-4940-8e04-466b88ed7966",
+              "name": "Impressions",
+              "value": "={{ $json.insights.data[0].impressions }}",
+              "type": "string"
+            },
+            {
+              "id": "885107c2-dd41-41ac-9519-1c548cd1b9d1",
+              "name": "Clicks",
+              "value": "={{ $json.insights.data[0].clicks }}",
+              "type": "string"
+            },
+            {
+              "id": "8c771e20-750a-4b83-8d8b-7b9f98fefacd",
+              "name": "Spend",
+              "value": "={{ $json.insights.data[0].spend }}",
+              "type": "string"
+            },
+            {
+              "id": "517e1d58-2e92-464a-af9a-58319d0f74d5",
+              "name": "CPC",
+              "value": "={{ $json.insights.data[0].cpc }}",
+              "type": "string"
+            },
+            {
+              "id": "754fb45a-8973-48bc-894d-be2d8cdbb224",
+              "name": "CPM",
+              "value": "={{ $json.insights.data[0].cpm }}",
+              "type": "string"
+            },
+            {
+              "id": "9bb4617b-267e-4d99-94c8-0794871fd33e",
+              "name": "Conversions",
+              "value": "={{ $json.insights.data[0].actions[4].value }}",
+              "type": "string"
+            },
+            {
+              "id": "12b30ca9-189b-4023-8def-c8df4a6ef91a",
+              "name": "Conversion Value",
+              "value": "={{ $json.insights.data[0].action_values[8].value }}",
+              "type": "string"
+            },
+            {
+              "id": "09951900-5588-4685-9c05-5e08a02c808b",
+              "name": "Video ID",
+              "value": "={{ $json.creative.video_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        7320,
+        2780
+      ],
+      "id": "bf822e8d-a09a-4ff8-9da4-e29a0b96f31b",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v22.0",
+        "node": "me",
+        "edge": "adaccounts",
+        "options": {}
+      },
+      "id": "567e2cf4-8026-40c0-a7fe-2d90f2d584ec",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        5640,
+        2820
+      ],
+      "name": "Get FB Ad Accounts",
+      "typeVersion": 1,
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "T0hu8zUoxfOlZZee",
+          "name": "Facebook Graph account - N8N Connect La Tribu"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v22.0",
+        "node": "={{$json.id}}",
+        "edge": "campaigns",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "fields",
+                "value": "id,name,effective_status"
+              }
+            ]
+          }
+        }
+      },
+      "id": "20b5f43c-40a9-425c-bfb3-be8e66588631",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        6140,
+        2540
+      ],
+      "name": "Get Ad Campaigns",
+      "typeVersion": 1,
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "T0hu8zUoxfOlZZee",
+          "name": "Facebook Graph account - N8N Connect La Tribu"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v22.0",
+        "node": "={{$json.id}}",
+        "edge": "adsets",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "fields",
+                "value": "id,name,effective_status,budget,currency"
+              }
+            ]
+          }
+        }
+      },
+      "id": "7346e5f0-6349-422f-8dd5-3723af8f9477",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        6480,
+        2540
+      ],
+      "name": "Get FB Ad Sets",
+      "typeVersion": 1,
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "T0hu8zUoxfOlZZee",
+          "name": "Facebook Graph account - N8N Connect La Tribu"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v22.0",
+        "node": "={{$json.id}}",
+        "edge": "ads",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "fields",
+                "value": "id,name,effective_status,creative{image_url,video_id,link_url},insights.date_preset(maximum){ctr,cpm,cpc,spend,actions,action_values,impressions,clicks},campaign{name},adset{name}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "79b6420c-34d9-40ff-898c-d590b972c5e3",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "position": [
+        7000,
+        2800
+      ],
+      "name": "Get FB Ad Contents",
+      "typeVersion": 1,
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "T0hu8zUoxfOlZZee",
+          "name": "Facebook Graph account - N8N Connect La Tribu"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        5380,
+        2820
+      ],
+      "id": "613fe57a-cb10-4eab-97cb-e559db79dac8",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "064bd2e4-4897-4686-802b-f2f66504db77",
+              "leftValue": "={{ $json.account_id }}",
+              "rightValue": "344673658114820",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        5980,
+        2820
+      ],
+      "id": "dda772fa-5961-4da9-b6aa-9a6eed9d16c4",
+      "name": "If - DIVISUAL"
+    },
+    {
+      "parameters": {
+        "content": "# 🚀 La Tribu Divisual\n\n## Este agente tiene un valor en el mercado de **$497.00**\n\n\n## Accede a **La Tribu Divisual** para aprender a crear agentes más avanzados y a generar altos ingresos con ellos de forma real y segura.\n\n# 👉 [Click aquí para unirte a la Lista de espera](https://divisualproject.academy/)\n",
+        "height": 360,
+        "width": 660,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        7520,
+        2560
+      ],
+      "id": "d16207d4-7e06-4c76-8c2d-1d6cb052c0ba",
+      "name": "Sticky Note10"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Generador de video": {
+      "main": [
+        [
+          {
+            "node": "30 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out6": {
+      "main": [
+        [
+          {
+            "node": "If - DIVISUAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out7": {
+      "main": [
+        [
+          {
+            "node": "Get FB Ad Sets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out8": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out9": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get FB Ad Contents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get FB Ad Accounts": {
+      "main": [
+        [
+          {
+            "node": "Split Out6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ad Campaigns": {
+      "main": [
+        [
+          {
+            "node": "Split Out7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get FB Ad Sets": {
+      "main": [
+        [
+          {
+            "node": "Split Out8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get FB Ad Contents": {
+      "main": [
+        [
+          {
+            "node": "Split Out9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get FB Ad Accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If - DIVISUAL": {
+      "main": [
+        [
+          {
+            "node": "Get Ad Campaigns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e67c46db-28a3-4221-928c-5d5be145d076",
+  "meta": {
+    "instanceId": "2723e5c0cdf73e609a9d6131a4145b2656ca7463c71fa761a441dc255964ffd8"
+  },
+  "id": "JgLJz456oriiL7W9",
+  "tags": [
+    {
+      "createdAt": "2025-05-13T08:00:58.464Z",
+      "updatedAt": "2025-05-13T08:00:58.464Z",
+      "id": "IxHXOpyTZspV9j2o",
+      "name": "La Tribu Divisual"
+    },
+    {
+      "createdAt": "2025-06-01T18:57:05.689Z",
+      "updatedAt": "2025-06-01T18:57:05.689Z",
+      "id": "uhDg4e01CCZHetVc",
+      "name": "Curso Adrián Sáenz"
+    }
+  ]
+}
