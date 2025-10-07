@@ -1,0 +1,97 @@
+{
+  "name": "Slzr-Random-Number",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        0
+      ],
+      "id": "04918c36-927b-4df0-bed9-44d6ea210a68",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "const number = Math.floor(Math.random() * 100) + 1;\nreturn [{ number }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "51fe7ac0-9109-4db3-8917-9e0414187937",
+      "name": "Random Number"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger \n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "7356af42-9109-420e-8a73-551befde3ed3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Se ingresa el código JavaScript para elegir un número aleatorio** ",
+        "height": 256,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        144,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "405b3871-1711-49d6-8e14-48df45da08c8",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Número Aleatorio\n**Objetivo:** Crear un número del 1 al 100.",
+        "height": 96,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -368,
+        -240
+      ],
+      "typeVersion": 1,
+      "id": "48195b40-a34b-489b-96d9-e7b36eac92ad",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Random Number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8b992b7d-cfb7-4465-9de1-f3e0f81ccd5f",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "2WEuMLebpOXk5yqp",
+  "tags": []
+}
