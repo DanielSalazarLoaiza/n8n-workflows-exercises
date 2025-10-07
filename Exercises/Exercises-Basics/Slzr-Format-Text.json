@@ -1,0 +1,131 @@
+{
+  "name": "Slzr-Format-Text",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "ad6e33d1-9ab7-4fdb-bb01-d0cc053172e4",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).**",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "c463ba1a-21df-4c8d-8b29-0d4ab61a3879",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se define la variable name con el valor \"Daniel Salazar Loaiza\".** ",
+        "height": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        96,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "1acb8946-e552-4d0a-b554-2ab53c6ef4b2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "74ec9193-4e9e-4f49-9549-318d039cf405",
+              "name": "name",
+              "value": "Daniel Salazar Loaiza",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        0
+      ],
+      "id": "72f347a5-7a87-44dd-9ca9-0e70568cb081",
+      "name": "Name"
+    },
+    {
+      "parameters": {
+        "jsCode": "const name = $input.first().json.name;\nreturn [{ nameFormat: name.toUpperCase() }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "15eab924-93e9-4d99-b6b9-ad488caf16d7",
+      "name": "Cambiar a Mayúsculas"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Se ingresa el código JavaScript para usar toUpperCase() y con este cambiar el formato de texto y convertirlo todo a mayúsculas.** ",
+        "height": 320,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        384,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "b4a2b807-bf1b-42ae-82f3-e98348ae9d5c",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Name": {
+      "main": [
+        [
+          {
+            "node": "Cambiar a Mayúsculas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b56fcace-28c8-4c0c-9970-4d9711079c92",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "eXWvvcYu9LcJcHPv",
+  "tags": []
+}
