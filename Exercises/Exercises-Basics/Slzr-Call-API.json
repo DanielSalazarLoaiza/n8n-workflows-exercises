@@ -1,0 +1,84 @@
+{
+  "name": "Slzr-Call-API",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        0
+      ],
+      "id": "e24a90dd-d944-4ecb-9c34-8926e15b7a0a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://api.chucknorris.io/jokes/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        144,
+        0
+      ],
+      "id": "ad79b113-63d6-425a-8b86-9a28760c08ed",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304,
+        "width": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -192,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "8cce9968-c487-43ef-bee2-4ea6fc221b42",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## HTTP Request\n**Chistes Aleatorios: ** Se extrae una API el cual te contara un chiste aleatorio.",
+        "height": 320,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        80,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "f2bb62d9-dcfe-439c-8c33-7552a5af52b6",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e38bd8cb-eee0-425f-a7fc-626fefc7f06a",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "e6hLtRtycmcjwCyG",
+  "tags": []
+}
