@@ -1,0 +1,96 @@
+{
+  "name": "Slzr-Date-Locale",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        0
+      ],
+      "id": "46e4d39e-25b8-4b05-8342-65086ddcffe7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = new Date();\nreturn [{ date: now.toLocaleString() }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        0
+      ],
+      "id": "af0ee94e-1f9c-426a-834c-6a24640a4628",
+      "name": "Date"
+    },
+    {
+      "parameters": {
+        "content": "## Generar una fecha y hora actual\n**Objetivo: Obtener la hora actual con formato legible.**",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -400,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "1eceda6c-f0bf-4c50-9c66-968d6750bee5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).** ",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -272,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "84dc6da7-0486-4b72-99f3-ac3ab74d501f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Code in JavaScript\n**Se ejecuta código JavaScript para poder obtener la fecha actual dependiendo de donde esta ubicado la persona.** ",
+        "height": 288,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "87dd3f36-32a6-402b-b927-cb8d394b5b29",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fe79c724-efda-4460-b7cb-6e04d59c0c12",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "swRYtCzv5sJjkQjL",
+  "tags": []
+}
