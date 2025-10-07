@@ -1,0 +1,202 @@
+{
+  "name": "Slzr-Combine-Data",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f7c287fa-1cde-4fad-a1f3-0b03b142829e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "name, age",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        800,
+        -16
+      ],
+      "id": "f33fd0a0-6218-4a80-a0fe-fd5c17d85fac",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "55b77488-40b3-40c0-8428-8f85294d1e10",
+              "name": "age",
+              "value": 18,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        496,
+        -192
+      ],
+      "id": "1a7524e3-f283-46a1-9944-657d7766fc8e",
+      "name": "Age"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "96baa964-e254-4268-8e1f-d8cb2d3b61d4",
+              "name": "name",
+              "value": "Daniel Salazar Loaiza",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "id": "45697eb3-640a-4fa9-a9bc-500e759ae76e",
+      "name": "Name"
+    },
+    {
+      "parameters": {
+        "content": "## Manual Trigger\n**Este nodo sirve para iniciar el flujo sólo cuando haces Test Workflow (ideal para desarrollar).**",
+        "height": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "5417d547-4f7b-4154-a71a-bc72357b70d5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se crea la variable Name** ",
+        "height": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        176,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "b43dc14d-8160-43b7-9227-745ad307ccad",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields\n**Se crea la variable Age** ",
+        "height": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "93672062-d2b9-4c05-9e83-5f49b083c493",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Merge \n**Se combinan el Name y Age** ",
+        "height": 240,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        736,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "c892cf8f-162b-4310-8791-63dfed287d9f",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Combinar datos de dos nodos Set\n**Objetivo:** Fusionar dos ramas del flujo.",
+        "height": 128,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -336,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "6b9a854a-d0d9-4163-81a9-266420899a4c",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Age": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Name": {
+      "main": [
+        [
+          {
+            "node": "Age",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "48c7696d-f598-48d8-9ccd-000aa63cced7",
+  "meta": {
+    "instanceId": "24504d5ef4ba2e1595895fc6ce63d2429031db5ad88643e0f365bd7a1c85b90f"
+  },
+  "id": "9D0hZJpzGExl1CkS",
+  "tags": []
+}
